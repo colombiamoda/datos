@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="COLOMBIAMODA 2026">
+    <title>Dashboard Feria 2026 - COLOMBIAMODA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #1c372a 0%, #2d4a3d 100%);
+            padding: 0;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #1c372a 0%, #0f1f1a 100%);
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            border-bottom: 4px solid #D08444;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .page-header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            font-size: clamp(32px, 8vw, 48px);
+            font-weight: 800;
+            color: #FFECAF;
+            margin-bottom: 0.5rem;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header-subtitle {
+            font-size: clamp(12px, 3vw, 16px);
+            color: #D08444;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .header-tagline {
+            font-size: clamp(14px, 4vw, 18px);
+            color: #FFECAF;
+            margin-top: 1rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .nav-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-btn {
+            background: white;
+            border: 3px solid #D08444;
+            border-radius: 10px;
+            padding: clamp(1rem, 3vw, 1.5rem);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 800;
+            font-size: clamp(12px, 3vw, 14px);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1c372a;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #FFECAF 0%, #fff9e6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(208, 132, 68, 0.2);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #D08444 0%, #c9723f 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(208, 132, 68, 0.3);
+        }
+
+        .section-container {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .section-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.16);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #1c372a 0%, #2d4a3d 100%);
+            color: white;
+            padding: 1.8rem 1.5rem;
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-left: 6px solid #D08444;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: -30px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 236, 175, 0.1);
+            border-radius: 50%;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            right: -50px;
+            bottom: -50px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 236, 175, 0.08);
+            border-radius: 50%;
+        }
+
+        .section-header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-icon {
+            font-size: clamp(28px, 6vw, 36px);
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .section-content {
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+        }
+
+        .kpi-card {
+            background: linear-gradient(135deg, #FFECAF 0%, #fff9e6 100%);
+            border: 3px solid #D08444;
+            border-radius: 10px;
+            padding: clamp(1rem, 3vw, 1.5rem);
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(208, 132, 68, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #D08444, #1c372a, #0F6E56);
+        }
+
+        .kpi-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(208, 132, 68, 0.25);
+        }
+
+        .kpi-label {
+            font-size: clamp(9px, 2vw, 11px);
+            color: #1c372a;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .kpi-value {
+            font-size: clamp(28px, 6vw, 36px);
+            font-weight: 800;
+            color: #1c372a;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .kpi-delta {
+            font-size: clamp(10px, 2.5vw, 12px);
+            font-weight: 700;
+            color: #666;
+        }
+
+        .delta-up {
+            color: #0F6E56;
+        }
+
+        .delta-down {
+            color: #D08444;
+        }
+
+        .highlight-table {
+            background: white;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            padding: 0;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .highlight-title {
+            font-size: clamp(12px, 3vw, 14px);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+            padding: clamp(1rem, 3vw, 1.5rem);
+            background: linear-gradient(135deg, #1c372a 0%, #2d4a3d 100%);
+            border-bottom: 3px solid #D08444;
+        }
+
+        .highlight-row {
+            display: grid;
+            grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr;
+            align-items: center;
+            padding: clamp(0.75rem, 2vw, 1rem) clamp(0.75rem, 2vw, 1.5rem);
+            border-bottom: 1px solid #f0f0f0;
+            font-size: clamp(11px, 2.5vw, 13px);
+            transition: background-color 0.2s ease;
+        }
+
+        @media (max-width: 600px) {
+            .highlight-row {
+                grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+                padding: 0.7rem;
+                font-size: 10px;
+            }
+        }
+
+        .highlight-row:hover {
+            background-color: #fafaf8;
+        }
+
+        .highlight-row:last-child {
+            border-bottom: none;
+        }
+
+        .highlight-row.header {
+            background: #1c372a;
+            color: white;
+            font-weight: 800;
+            border-bottom: 2px solid #D08444;
+        }
+
+        .highlight-row.alt {
+            background: linear-gradient(90deg, #fffef9 0%, #fafaf8 100%);
+        }
+
+        .highlight-row.total {
+            background: linear-gradient(135deg, #FFECAF 0%, #fff9e6 100%);
+            font-weight: 800;
+            border-top: 3px solid #1c372a;
+        }
+
+        .highlight-label {
+            color: #666;
+            font-weight: 600;
+        }
+
+        .highlight-value {
+            color: #1c372a;
+            font-weight: 800;
+            text-align: right;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #FFECAF 0%, #fff9e6 100%);
+            border: 2px solid #D08444;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-box-big {
+            font-size: clamp(32px, 7vw, 48px);
+            font-weight: 800;
+            color: #1c372a;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-box-label {
+            font-size: clamp(12px, 3vw, 14px);
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .stat-box-sub {
+            font-size: clamp(10px, 2.5vw, 12px);
+            color: #999;
+            margin-top: 0.5rem;
+        }
+
+        .distribution-bar {
+            background: #e8e8e8;
+            border-radius: 20px;
+            height: 12px;
+            overflow: hidden;
+            margin: 0.75rem 0;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .distribution-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #D08444, #1c372a);
+            transition: width 0.3s ease;
+        }
+
+        .insights-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            border-left: 5px solid #0F6E56;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 8px;
+        }
+
+        .insights-title {
+            font-size: clamp(12px, 3vw, 14px);
+            font-weight: 800;
+            color: #0F6E56;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .insights-bullet {
+            font-size: clamp(11px, 2.5vw, 13px);
+            color: #1c372a;
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .insights-bullet::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            font-weight: 800;
+            color: #0F6E56;
+        }
+
+        .page-footer {
+            background: #1c372a;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-top: 4px solid #D08444;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-size: clamp(12px, 3vw, 14px);
+            color: #FFECAF;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .footer-brands {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-logo {
+            font-size: clamp(18px, 5vw, 24px);
+            color: #FFECAF;
+            font-weight: 800;
+        }
+
+        .brand-text {
+            color: #D08444;
+            font-size: clamp(10px, 2.5vw, 12px);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        .brand-separator {
+            width: 2px;
+            height: clamp(25px, 5vw, 30px);
+            background: #D08444;
+        }
+
+        .footer-note {
+            font-size: clamp(10px, 2vw, 11px);
+            color: #888;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 600px) {
+            .page-header {
+                padding: 2rem 1rem;
+            }
+
+            .section-content {
+                padding: 1.2rem;
+            }
+
+            .nav-tabs {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-brands {
+                gap: 0.75rem;
+            }
+
+            .brand-separator {
+                width: 1px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="header-title">COLOMBIAMODA</div>
+            <div class="header-subtitle">Informe</div>
+            
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="showSection('asistentes')">📊 Asistentes</button>
+            <button class="nav-btn" onclick="showSection('boleteria')">🎫 Boletería</button>
+            <button class="nav-btn" onclick="showSection('expositores')">🎯 Expositores</button>
+        </div>
+
+        <!-- SECCIÓN 1: ASISTENTES -->
+        <div id="asistentes" class="section-container active">
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">📊</div>
+                    <div class="section-header-content">ASISTENTES</div>
+                </div>
+                <div class="section-content" id="evento-content"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">📈</div>
+                    <div class="section-header-content">ASISTENTES POR DÍA</div>
+                </div>
+                <div class="section-content" id="asistentes-dia-content"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">🌍</div>
+                    <div class="section-header-content">DERRAMA ECONÓMICA</div>
+                </div>
+                <div class="section-content" id="derrama-content"></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: BOLETERÍA -->
+        <div id="boleteria" class="section-container">
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">🎫</div>
+                    <div class="section-header-content">BOLETERÍA 2026</div>
+                </div>
+                <div class="section-content" id="boleteria-content"></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: EXPOSITORES -->
+        <div id="expositores" class="section-container">
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">🎯</div>
+                    <div class="section-header-content">EXPOSITORES 2026 </div>
+                </div>
+                <div class="section-content" id="expositores-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <div class="footer-content">
+            <div class="footer-title">Actualización: Martes 28, 1:00</div>
+            <div class="footer-brands">
+                <div class="brand-item">
+                    <div class="brand-logo">-</div>
+                    <div style="color: #FFECAF; font-size: clamp(9px, 2.5vw, 11px);">Datos tomados de https://registro.colombiamoda.com</div>
+					 <div style="color: #FFECAF; font-size: clamp(9px, 2.5vw, 11px);"> - https://eticketablanca.com </div>
+					  <div style="color: #FFECAF; font-size: clamp(9px, 2.5vw, 11px);"> - Oportunidades Cerradas/Ganadas Salesforce </div>
+                </div>
+                <div class="brand-separator"></div>
+                <div class="brand-item">
+                    <div class="brand-text">INEXMODA</div>
+                    <div style="color: #FFECAF; font-size: clamp(9px, 2.5vw, 11px);">CONOCE, CONECTA Y TRANSFORMA</div>
+                </div>
+            </div>
+            <div class="footer-note">Dashboard Colombiamoda 2026 | Todos los cálculos basados en datos actualizables</div>
+        </div>
+    </div>
+
+    <script>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           VARIABLES MAESTRAS - MODIFICA AQUÍ PARA ACTUALIZAR TODOS LOS CÁLCULOS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        const CONFIG = {
+            // ─────────────────────────────────────────────────────────────────────
+            // DATOS DE ASISTENTES POR CATEGORÍA (VARIABLE MAESTRA)
+            // ─────────────────────────────────────────────────────────────────────
+            comprador_nacional_2026: 2283,
+            comprador_nacional_2025: 9896,
+            comprador_internacional_2026: 606,
+            comprador_internacional_2025: 1170,
+            visitantes_2026: 783,
+            visitantes_2025: 3726,
+            otras_categorias_2026: 4458,
+            otras_categorias_2025: 8616,
+
+            // CLIENTES Y EXPOSITORES
+            clientes_totales: 624,
+            clientes_con_stand: 528,
+            clientes_otros: 98,
+            total_espacios: 528,  // Sincronizado con clientes_con_stand
+            nacional: 498,
+            internacional: 42,
+            sin_pais: 3,
+            paises_internacionales: 9,
+            continentes: 3,
+
+            // PABELLONES - Solo expositores, sin m²
+            pabellones: [
+                { nombre: 'Amarillo', exp: 125 },
+                { nombre: 'Rojo', exp: 85 },
+                { nombre: 'Azul', exp: 80 },
+                { nombre: 'Blanco', exp: 80 },
+                { nombre: 'Verde', exp: 71 },
+                { nombre: 'Gran Salón', exp: 64 },
+                { nombre: 'Caja de Madera', exp: 24 },
+                { nombre: 'Hall Verde', exp: 8 },
+                { nombre: 'Blanco Extension', exp: 4 },
+                { nombre: 'Zona Urbana', exp: 2 },
+            ],
+
+            // INTERNACIONAL POR CONTINENTE
+            internacional_asia: 23,
+            internacional_america: 17,
+            internacional_europa: 2,
+
+            // TOP PAÍSES
+            top_paises: [
+                { pais: 'China', exp: 15, continente: 'Asia' },
+                { pais: 'Turquía', exp: 8, continente: 'Asia' },
+                { pais: 'Brasil', exp: 7, continente: 'América' },
+                { pais: 'Panamá', exp: 3, continente: 'América' },
+                { pais: 'Estados Unidos', exp: 3, continente: 'América' },
+                { pais: 'Perú', exp: 3, continente: 'América' },
+            ],
+
+            // REGIONES NACIONALES
+            antioquia: 179,
+            bogota: 136,
+            cucuta: 41,
+            cali: 36,
+            bucaramanga: 35,
+            otras_regiones: 71,
+
+            // GOURMET, ACTIVACIONES, PATROCINIOS
+            patrocinio_marca: 43,
+            zona_gourmet: 22,
+            activacion_marca: 20,
+            canje_medios: 11,
+            patrocinio_institucional: 3,
+            patrocinio_financiero: 1,
+
+            // COMERCIALES TOP
+            comerciales_top: [
+                { nombre: 'Johana Cano', espacios: 168 },
+                { nombre: 'Paola Ortiz', espacios: 127 },
+                { nombre: 'Laura Baron Mendoza', espacios: 114 },
+                { nombre: 'Laura Restrepo Ospina', espacios: 98 },
+            ],
+
+            // DERRAMA ECONÓMICA
+            derrama_antioquia: 3744,
+            derrama_colombia_sin_ant: 3409,
+            derrama_internacionales: 978,
+
+            // ASISTENTES POR DÍA
+            dia1_2026: 8130, dia1_2025: 13205, dia1_2024: 11999, dia1_2023: 13285,
+            dia2_2026: 0, dia2_2025: 16302, dia2_2024: 14710, dia2_2023: 16080,
+            dia3_2026: 0, dia3_2025: 14378, dia3_2024: 13253, dia3_2023: 14237,
+
+            // BOLETERÍA - ETAPAS
+            meta_boleteria: 1200000000,
+            precio_50_ingresos_2026: 255510000,
+            precio_50_boletas_2026: 1504,
+            precio_50_ingresos_2025: 422240000,
+            precio_50_boletas_2025: 2998,
+            precio_75_ingresos_2026: 109055000,
+            precio_75_boletas_2026: 427,
+            precio_75_ingresos_2025: 0,
+            precio_75_boletas_2025: 0,
+            precio_full_ingresos_2026: 219470000,
+            precio_full_boletas_2026: 646,
+            precio_full_ingresos_2025: 228480000,
+            precio_full_boletas_2025: 1250,
+
+            // BOLETERÍA - POR DÍAS DEL EVENTO
+            martes_ingresos_2026: 80520000,
+            martes_boletas_2026: 242,
+            martes_ingresos_2025: 204480000,
+            martes_boletas_2025: 661,
+            
+            miercoles_ingresos_2026: 0,
+            miercoles_boletas_2026: 0,
+            miercoles_ingresos_2025: 175620000,
+            miercoles_boletas_2025: 606,
+            
+            jueves_ingresos_2026: 0,
+            jueves_boletas_2026: 0,
+            jueves_ingresos_2025: 92860000,
+            jueves_boletas_2025: 241,
+        };
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           FUNCIONES CALCULADAS (DERIVAN DE VARIABLES MAESTRAS)
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        function getTotalAsistentes2026() {
+            return CONFIG.comprador_nacional_2026 + CONFIG.comprador_internacional_2026 + CONFIG.visitantes_2026 + CONFIG.otras_categorias_2026;
+        }
+
+        function getTotalAsistentes2025() {
+            return CONFIG.comprador_nacional_2025 + CONFIG.comprador_internacional_2025 + CONFIG.visitantes_2025 + CONFIG.otras_categorias_2025;
+        }
+
+        function getTotalCompradores2026() {
+            return CONFIG.comprador_nacional_2026 + CONFIG.comprador_internacional_2026;
+        }
+
+        function getTotalCompradores2025() {
+            return CONFIG.comprador_nacional_2025 + CONFIG.comprador_internacional_2025;
+        }
+
+        function getTotalExpositores() {
+            return CONFIG.pabellones.reduce((sum, p) => sum + p.exp, 0);
+        }
+
+        function getTotalGourmet() {
+            return CONFIG.patrocinio_marca + CONFIG.zona_gourmet + CONFIG.activacion_marca + 
+                   CONFIG.canje_medios + CONFIG.patrocinio_institucional + CONFIG.patrocinio_financiero;
+        }
+
+        function getTotalDerrama() {
+            return CONFIG.derrama_antioquia + CONFIG.derrama_colombia_sin_ant + CONFIG.derrama_internacionales;
+        }
+
+        function getTotalBoleteria2026() {
+            return CONFIG.precio_50_ingresos_2026 + CONFIG.precio_75_ingresos_2026 + 
+                   CONFIG.precio_full_ingresos_2026 + CONFIG.martes_ingresos_2026 + 
+                   CONFIG.miercoles_ingresos_2026 + CONFIG.jueves_ingresos_2026;
+        }
+
+        function getTotalBoleteria2025() {
+            return CONFIG.precio_50_ingresos_2025 + CONFIG.precio_75_ingresos_2025 + 
+                   CONFIG.precio_full_ingresos_2025 + CONFIG.martes_ingresos_2025 + 
+                   CONFIG.miercoles_ingresos_2025 + CONFIG.jueves_ingresos_2025;
+        }
+
+        function getTotalBoletas2026() {
+            return CONFIG.precio_50_boletas_2026 + CONFIG.precio_75_boletas_2026 + 
+                   CONFIG.precio_full_boletas_2026 + CONFIG.martes_boletas_2026 + 
+                   CONFIG.miercoles_boletas_2026 + CONFIG.jueves_boletas_2026;
+        }
+
+        function getTotalBoletas2025() {
+            return CONFIG.precio_50_boletas_2025 + CONFIG.precio_75_boletas_2025 + 
+                   CONFIG.precio_full_boletas_2025 + CONFIG.martes_boletas_2025 + 
+                   CONFIG.miercoles_boletas_2025 + CONFIG.jueves_boletas_2025;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           FUNCIONES AUXILIARES
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        function calcDelta(actual, anterior) {
+            if (anterior === 0) return 0;
+            return ((actual - anterior) / anterior * 100).toFixed(1);
+        }
+
+        function calcPct(parte, total) {
+            if (total === 0) return 0;
+            return (parte / total * 100).toFixed(1);
+        }
+
+        function formatMoney(value) {
+            if (value === 0) return '$0M';
+            if (value >= 1000000000) return '$' + (value / 1000000000).toFixed(2) + 'B';
+            if (value >= 1000000) return '$' + (value / 1000000).toFixed(1) + 'M';
+            if (value >= 1000) return '$' + (value / 1000).toFixed(1) + 'K';
+            return '$' + value;
+        }
+
+        function formatNum(v) {
+            return v.toLocaleString();
+        }
+
+        function getDeltaClass(delta) {
+            return delta > 0 ? 'delta-up' : delta < 0 ? 'delta-down' : '';
+        }
+
+        function getDeltaText(delta) {
+            if (delta === 0) return '—';
+            return (delta > 0 ? '↑ ' : '↓ ') + Math.abs(delta) + '%';
+        }
+
+        function showSection(section) {
+            document.querySelectorAll('.section-container').forEach(s => s.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           RENDERIZAR SECCIÓN EXPOSITORES
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        function renderExpositores() {
+            const c = CONFIG;
+            const pct_con_stand = calcPct(c.clientes_con_stand, c.clientes_totales);
+            const pct_otros = calcPct(c.clientes_otros, c.clientes_totales);
+            const pct_nac = calcPct(c.nacional, c.total_espacios);
+            const pct_int = calcPct(c.internacional, c.total_espacios);
+            const total_gourmet = getTotalGourmet();
+            const total_exp = getTotalExpositores();
+
+            let html = `
+                <div style="margin-bottom: 2rem;">
+                    <div class="stat-box">
+                        <div class="stat-box-big">${c.clientes_totales}</div>
+                        <div class="stat-box-label">Clientes </div>
+                        <div class="stat-box-sub">La cifra clave que define nuestro alcance real en el mercado</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+                    <div class="stat-box">
+                        <div class="stat-box-big">${c.clientes_con_stand}</div>
+                        <div class="stat-box-label">Con Stand</div>
+                        <div class="stat-box-sub">${pct_con_stand}% de clientes</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-big">${c.clientes_otros}</div>
+                        <div class="stat-box-label">Gourmet/Activaciones</div>
+                        <div class="stat-box-sub">${pct_otros}% de clientes</div>
+                    </div>
+                </div>
+
+                <div class="highlight-table">
+                    <div class="highlight-title">Composición de Expositores (${c.total_espacios} espacios)</div>
+                    
+                    <div style="padding: 1.5rem;">
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span style="font-weight: 600; color: #1c372a;">🇨🇴 Nacionales</span>
+                                <span style="font-weight: 700; color: #1c372a;">${c.nacional} (${pct_nac}%)</span>
+                            </div>
+                            <div class="distribution-bar">
+                                <div class="distribution-fill" style="width: ${pct_nac}%"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span style="font-weight: 600; color: #1c372a;">🌍 Internacionales</span>
+                                <span style="font-weight: 700; color: #D08444;">${c.internacional} (${pct_int}%)</span>
+                            </div>
+                            <div class="distribution-bar">
+                                <div class="distribution-fill" style="width: ${pct_int}%; background: linear-gradient(90deg, #D08444, #FFECAF);"></div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; padding-top: 1.5rem; border-top: 2px solid #e8e8e8;">
+                            <div style="font-size: clamp(18px, 5vw, 24px); font-weight: 800; color: #1c372a; margin-bottom: 0.5rem;">
+                                🌎 ${c.paises_internacionales} PAÍSES · ${c.continentes} CONTINENTES 🌍
+                            </div>
+                            <div style="font-size: 12px; color: #666;">Asia · América · Europa</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-table">
+                    <div class="highlight-title">Distribución de Expositores por Pabellón</div>
+                    
+                    <div class="highlight-row header">
+                        <span>Pabellón</span>
+                        <span class="highlight-value">Expositores</span>
+                        <span class="highlight-value">% Muestra</span>
+                        <span class="highlight-value">Posición</span>
+                    </div>
+                    ${c.pabellones.map((p, i) => {
+                        const pct_exp = calcPct(p.exp, total_exp);
+                        return `
+                            <div class="highlight-row ${i % 2 === 0 ? '' : 'alt'}">
+                                <span class="highlight-label">${p.nombre}</span>
+                                <span class="highlight-value">${p.exp}</span>
+                                <span class="highlight-value">${pct_exp}%</span>
+                                <span class="highlight-value">#${i + 1}</span>
+                            </div>
+                        `;
+                    }).join('')}
+                    <div class="highlight-row total">
+                        <span class="highlight-label">TOTAL</span>
+                        <span class="highlight-value">${total_exp}</span>
+                        <span class="highlight-value">100%</span>
+                        <span class="highlight-value">—</span>
+                    </div>
+                </div>
+
+                <div class="highlight-table">
+                    <div class="highlight-title">Top Países Internacionales</div>
+                    
+                    <div class="highlight-row header">
+                        <span>País</span>
+                        <span class="highlight-value">Expositores</span>
+                        <span class="highlight-value">% Muestra</span>
+                        <span class="highlight-value">Continente</span>
+                    </div>
+                    ${c.top_paises.map((p, i) => {
+                        const pct = calcPct(p.exp, c.internacional);
+                        return `
+                            <div class="highlight-row ${i % 2 === 0 ? '' : 'alt'}">
+                                <span class="highlight-label">${p.pais}</span>
+                                <span class="highlight-value">${p.exp}</span>
+                                <span class="highlight-value">${pct}%</span>
+                                <span class="highlight-value">${p.continente}</span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <div class="highlight-table">
+                    <div class="highlight-title">Top Regiones Nacionales (Antioquia unificada)</div>
+                    
+                    <div class="highlight-row header">
+                        <span>Región</span>
+                        <span class="highlight-value">Expositores</span>
+                        <span class="highlight-value">% Muestra</span>
+                        <span class="highlight-value">Ranking</span>
+                    </div>
+                    ${[
+                        { nombre: 'Antioquia', exp: c.antioquia },
+                        { nombre: 'Bogotá', exp: c.bogota },
+                        { nombre: 'Cúcuta', exp: c.cucuta },
+                        { nombre: 'Cali', exp: c.cali },
+                        { nombre: 'Bucaramanga', exp: c.bucaramanga },
+                    ].map((r, i) => {
+                        const pct = calcPct(r.exp, c.nacional);
+                        return `
+                            <div class="highlight-row ${i % 2 === 0 ? '' : 'alt'}">
+                                <span class="highlight-label">${r.nombre}</span>
+                                <span class="highlight-value">${r.exp}</span>
+                                <span class="highlight-value">${pct}%</span>
+                                <span class="highlight-value">#${i + 1}</span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <div class="highlight-table">
+                    <div class="highlight-title">Gourmet, Activaciones & Patrocinios (${total_gourmet} registros)</div>
+                    
+                    <div class="highlight-row header">
+                        <span>Servicio</span>
+                        <span class="highlight-value">Marcas</span>
+                        <span class="highlight-value">% Muestra</span>
+                        <span class="highlight-value">Tipo</span>
+                    </div>
+                    ${[
+                        { nombre: 'Patrocinio de Marca', valor: c.patrocinio_marca, tipo: 'Marca' },
+                        { nombre: 'Zona Gourmet', valor: c.zona_gourmet, tipo: 'Gastronomía' },
+                        { nombre: 'Activación de Marca', valor: c.activacion_marca, tipo: 'Marca' },
+                        { nombre: 'Canje / Medios', valor: c.canje_medios, tipo: 'Otros' },
+                        { nombre: 'Patrocinio Institucional', valor: c.patrocinio_institucional, tipo: 'Institucional' },
+                        { nombre: 'Patrocinio Financiero', valor: c.patrocinio_financiero, tipo: 'Financiero' },
+                    ].map((cat, i) => {
+                        const pct = calcPct(cat.valor, total_gourmet);
+                        return `
+                            <div class="highlight-row ${i % 2 === 0 ? '' : 'alt'}">
+                                <span class="highlight-label">${cat.nombre}</span>
+                                <span class="highlight-value">${cat.valor}</span>
+                                <span class="highlight-value">${pct}%</span>
+                                <span class="highlight-value">${cat.tipo}</span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <div class="highlight-table">
+                    <div class="highlight-title">Equipo Comercial - Top Vendedores</div>
+                    
+                    <div class="highlight-row header">
+                        <span>Comercial</span>
+                        <span class="highlight-value">Espacios</span>
+                        <span class="highlight-value">% Muestra</span>
+                        <span class="highlight-value">Ranking</span>
+                    </div>
+                    ${c.comerciales_top.map((com, i) => {
+                        const pct = calcPct(com.espacios, c.total_espacios);
+                        return `
+                            <div class="highlight-row ${i % 2 === 0 ? '' : 'alt'}">
+                                <span class="highlight-label">${com.nombre}</span>
+                                <span class="highlight-value">${com.espacios}</span>
+                                <span class="highlight-value">${pct}%</span>
+                                <span class="highlight-value">#${i + 1}</span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+<!-- 
+                <div class="insights-box">
+                    <div class="insights-title">📌 Insights Clave</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                </div> -->
+            `;
+
+            document.getElementById('expositores-content').innerHTML = html;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           RENDERIZAR SECCIÓN ASISTENTES
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        function renderAsistentes() {
+            const c = CONFIG;
+            
+            const total_2026 = getTotalAsistentes2026();
+            const total_2025 = getTotalAsistentes2025();
+            const compradores_2026 = getTotalCompradores2026();
+            const compradores_2025 = getTotalCompradores2025();
+            const total_derrama = getTotalDerrama();
+
+            const delta_nac = calcDelta(c.comprador_nacional_2026, c.comprador_nacional_2025);
+            const delta_int = calcDelta(c.comprador_internacional_2026, c.comprador_internacional_2025);
+            const delta_comp = calcDelta(compradores_2026, compradores_2025);
+            const delta_visit = calcDelta(c.visitantes_2026, c.visitantes_2025);
+            const delta_otras = calcDelta(c.otras_categorias_2026, c.otras_categorias_2025);
+            const delta_total = calcDelta(total_2026, total_2025);
+
+            const pct_ant = calcPct(c.derrama_antioquia, total_derrama);
+            const pct_col = calcPct(c.derrama_colombia_sin_ant, total_derrama);
+            const pct_int = calcPct(c.derrama_internacionales, total_derrama);
+
+            document.getElementById('evento-content').innerHTML = `
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Comprador Nacional</div>
+                        <div class="kpi-value">${formatNum(c.comprador_nacional_2026)}</div>
+                        <div class="kpi-delta ${getDeltaClass(delta_nac)}">${getDeltaText(delta_nac)}</div>
+                    </div>
+                    
+                    <div class="kpi-card">
+                        <div class="kpi-label">Comprador Internacional</div>
+                        <div class="kpi-value">${formatNum(c.comprador_internacional_2026)}</div>
+                        <div class="kpi-delta ${getDeltaClass(delta_int)}">${getDeltaText(delta_int)}</div>
+                    </div>
+                    
+                    <div class="kpi-card">
+                        <div class="kpi-label">Asistentes únicos totales</div>
+                        <div class="kpi-value">${formatNum(total_2026)}</div>
+                        <div class="kpi-delta ${getDeltaClass(delta_total)}">${getDeltaText(delta_total)}</div>
+                    </div>
+                </div>
+
+                <div class="highlight-table">
+                    <div class="highlight-title">Ingresos por Categorías 2026 vs  2025</div>
+                    
+                    <div class="highlight-row header">
+                        <span>Categoría      -       2026      -     2025 </span>
+                        <span class="highlight-value">2026</span>
+                        <span class="highlight-value">2025</span>
+                        <span class="highlight-value">%</span>
+                    </div>
+
+                    <div class="highlight-row">
+                        <span class="highlight-label">Compradores</span>
+                        <span class="highlight-value">${formatNum(compradores_2026)}</span>
+                        <span class="highlight-value">${formatNum(compradores_2025)}</span>
+                        <span class="highlight-value ${getDeltaClass(delta_comp)}">${getDeltaText(delta_comp)}</span>
+                    </div>
+
+                    <div class="highlight-row alt">
+                        <span class="highlight-label">Visitantes</span>
+                        <span class="highlight-value">${formatNum(c.visitantes_2026)}</span>
+                        <span class="highlight-value">${formatNum(c.visitantes_2025)}</span>
+                        <span class="highlight-value ${getDeltaClass(delta_visit)}">${getDeltaText(delta_visit)}</span>
+                    </div>
+
+                    <div class="highlight-row">
+                        <span class="highlight-label">Otras Cat.</span>
+                        <span class="highlight-value">${formatNum(c.otras_categorias_2026)}</span>
+                        <span class="highlight-value">${formatNum(c.otras_categorias_2025)}</span>
+                        <span class="highlight-value ${getDeltaClass(delta_otras)}">${getDeltaText(delta_otras)}</span>
+                    </div>
+
+                    <div class="highlight-row total">
+                        <span class="highlight-label">TOTAL</span>
+                        <span class="highlight-value">${formatNum(total_2026)}</span>
+                        <span class="highlight-value">${formatNum(total_2025)}</span>
+                        <span class="highlight-value ${getDeltaClass(delta_total)}">${getDeltaText(delta_total)}</span>
+                    </div>
+                </div>
+<!-- 
+                <div class="insights-box">
+                    <div class="insights-title">📌 Insights Clave</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                </div>-->
+            `;
+
+            document.getElementById('asistentes-dia-content').innerHTML = `
+                ${renderDiaCard('Martes', c.dia1_2026, c.dia1_2025, c.dia1_2024, c.dia1_2023)}
+                ${renderDiaCard('Miércoles', c.dia2_2026, c.dia2_2025, c.dia2_2024, c.dia2_2023)}
+                ${renderDiaCard('Jueves', c.dia3_2026, c.dia3_2025, c.dia3_2024, c.dia3_2023)}
+               
+<!-- 
+			   <div class="insights-box">
+                    <div class="insights-title">📌 Insights Clave</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                </div>
+				
+				-->
+            `;
+
+            document.getElementById('derrama-content').innerHTML = `
+                <div class="highlight-table">
+                    <div class="highlight-title">Asistentes por Origen</div>
+                    
+                    <div class="highlight-row header">
+                        <span>Origen</span>
+                        <span class="highlight-value">Asistentes</span>
+                        <span class="highlight-value">Porcentaje</span>
+                        <span class="highlight-value">Tipo</span>
+                    </div>
+
+                    <div class="highlight-row">
+                        <span class="highlight-label">Antioquia</span>
+                        <span class="highlight-value">${formatNum(c.derrama_antioquia)}</span>
+                        <span class="highlight-value">${pct_ant}%</span>
+                        <span class="highlight-value">Dept.</span>
+                    </div>
+
+                    <div class="highlight-row alt">
+                        <span class="highlight-label">Colombia (Sin Ant.)</span>
+                        <span class="highlight-value">${formatNum(c.derrama_colombia_sin_ant)}</span>
+                        <span class="highlight-value">${pct_col}%</span>
+                        <span class="highlight-value">Nac.</span>
+                    </div>
+
+                    <div class="highlight-row">
+                        <span class="highlight-label">Internacionales</span>
+                        <span class="highlight-value">${formatNum(c.derrama_internacionales)}</span>
+                        <span class="highlight-value">${pct_int}%</span>
+                        <span class="highlight-value">Ext.</span>
+                    </div>
+
+                    <div class="highlight-row total">
+                        <span class="highlight-label">TOTAL</span>
+                        <span class="highlight-value">${formatNum(total_derrama)}</span>
+                        <span class="highlight-value">100%</span>
+                        <span class="highlight-value">Ast.</span>
+                    </div>
+             
+<!-- 
+			 </div>
+                <div class="insights-box">
+                    <div class="insights-title">📌 Insights Clave</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                </div> -->            `;
+        }
+
+        function renderDiaCard(dia, y2026, y2025, y2024, y2023) {
+            const delta = calcDelta(y2026, y2025);
+            return `
+                <div style="background: linear-gradient(135deg, #FFECAF 0%, #fff9e6 100%); border: 2px solid #D08444; border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 12px rgba(208, 132, 68, 0.15);">
+                    <div style="font-size: clamp(13px, 3vw, 15px); color: #1c372a; font-weight: 800; margin-bottom: 1.2rem; border-bottom: 3px solid #D08444; padding-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">${dia}</div>
+                    
+                    <div style="text-align: center; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 2px dashed #D08444;">
+                        <div style="font-size: clamp(10px, 2.5vw, 11px); color: #1c372a; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.4rem; font-weight: 800;">Ingresos 2026</div>
+                        <div style="font-size: clamp(32px, 7vw, 42px); font-weight: 800; color: #1c372a; line-height: 1; margin-bottom: 0.3rem;">${formatNum(y2026)}</div>
+                        <div style="font-size: clamp(10px, 2.5vw, 12px); font-weight: 700; color: ${delta > 0 ? '#0F6E56' : '#D08444'};">${getDeltaText(delta)} vs meta 25</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; text-align: center;">
+                        <div style="display: flex; flex-direction: column; align-items: center; background: rgba(255, 255, 255, 0.6); padding: 0.8rem; border-radius: 8px; border: 2px solid rgba(208, 132, 68, 0.3);">
+                            <div style="font-size: clamp(8px, 2vw, 10px); color: #1c372a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.3rem; font-weight: 800;">2023</div>
+                            <div style="font-size: clamp(14px, 3.5vw, 16px); font-weight: 800; color: #1c372a;">${formatNum(y2023)}</div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center; background: rgba(255, 255, 255, 0.6); padding: 0.8rem; border-radius: 8px; border: 2px solid rgba(208, 132, 68, 0.3);">
+                            <div style="font-size: clamp(8px, 2vw, 10px); color: #1c372a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.3rem; font-weight: 800;">2024</div>
+                            <div style="font-size: clamp(14px, 3.5vw, 16px); font-weight: 800; color: #1c372a;">${formatNum(y2024)}</div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center; background: rgba(255, 255, 255, 0.6); padding: 0.8rem; border-radius: 8px; border: 2px solid rgba(208, 132, 68, 0.3);">
+                            <div style="font-size: clamp(8px, 2vw, 10px); color: #1c372a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.3rem; font-weight: 800;">2025</div>
+                            <div style="font-size: clamp(14px, 3.5vw, 16px); font-weight: 800; color: #1c372a;">${formatNum(y2025)}</div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center; background: rgba(255, 236, 175, 0.8); padding: 0.8rem; border-radius: 8px; border: 2px solid #D08444; font-weight: 800;">
+                            <div style="font-size: clamp(8px, 2vw, 10px); color: #1c372a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.3rem; font-weight: 800;">2026</div>
+                            <div style="font-size: clamp(14px, 3.5vw, 16px); font-weight: 800; color: #1c372a;">${formatNum(y2026)}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           RENDERIZAR SECCIÓN BOLETERÍA
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        function renderBoleteria() {
+            const c = CONFIG;
+            
+            const total_2026 = getTotalBoleteria2026();
+            const total_2025 = getTotalBoleteria2025();
+            const total_boletas_2026 = getTotalBoletas2026();
+            const total_boletas_2025 = getTotalBoletas2025();
+            const porcentaje_cumpl = calcPct(total_2026, c.meta_boleteria);
+
+            const delta = calcDelta(total_2026, total_2025);
+            const delta_boletas = calcDelta(total_boletas_2026, total_boletas_2025);
+
+            document.getElementById('boleteria-content').innerHTML = `
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Meta</div>
+                        <div class="kpi-value">$1,200M</div>
+                        <div class="kpi-delta">Millones</div>
+                    </div>
+                    
+                    <div class="kpi-card">
+                        <div class="kpi-label">Acumulado</div>
+                        <div class="kpi-value">${formatMoney(total_2026)}</div>
+                        <div class="kpi-delta ${getDeltaClass(delta)}">${getDeltaText(delta)}</div>
+                    </div>
+                    
+                    <div class="kpi-card">
+                        <div class="kpi-label">Cumpl.</div>
+                        <div class="kpi-value">${porcentaje_cumpl}%</div>
+                        <div class="kpi-delta">de Meta</div>
+                    </div>
+                    
+                    <div class="kpi-card">
+                        <div class="kpi-label">Boletas</div>
+                        <div class="kpi-value">${formatNum(total_boletas_2026)}</div>
+                        <div class="kpi-delta ${getDeltaClass(delta_boletas)}">${getDeltaText(delta_boletas)}</div>
+                    </div>
+                </div>
+
+                <div class="highlight-table">
+                    <div class="highlight-title">Desglose por Etapa vs Meta 2025</div>
+                    
+                    <div class="highlight-row header">
+                        <span>Etapa</span>
+                        <span class="highlight-value">Valor</span>
+                        <span class="highlight-value">Boletas</span>
+                        <span class="highlight-value">%</span>
+                    </div>
+
+                    ${[
+                        { nombre: 'Precio 50%', ing2026: c.precio_50_ingresos_2026, bol2026: c.precio_50_boletas_2026, ing2025: c.precio_50_ingresos_2025, bol2025: c.precio_50_boletas_2025 },
+                        { nombre: 'Precio 75%', ing2026: c.precio_75_ingresos_2026, bol2026: c.precio_75_boletas_2026, ing2025: c.precio_75_ingresos_2025, bol2025: c.precio_75_boletas_2025 },
+                        { nombre: 'Precio Full', ing2026: c.precio_full_ingresos_2026, bol2026: c.precio_full_boletas_2026, ing2025: c.precio_full_ingresos_2025, bol2025: c.precio_full_boletas_2025 },
+                    ].map((etapa, i) => {
+                        const delta_ing = calcDelta(etapa.ing2026, etapa.ing2025);
+                        return `
+                            <div class="highlight-row ${i % 2 === 0 ? '' : 'alt'}">
+                                <span class="highlight-label">${etapa.nombre}</span>
+                                <span class="highlight-value">${formatMoney(etapa.ing2026)}</span>
+                                <span class="highlight-value">${formatNum(etapa.bol2026)}</span>
+                                <span class="highlight-value ${getDeltaClass(delta_ing)}">${getDeltaText(delta_ing)}</span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <div class="highlight-table">
+                    <div class="highlight-title">Desglose por Día del Evento vs Meta 2025</div>
+                    
+                    <div class="highlight-row header">
+                        <span>Día</span>
+                        <span class="highlight-value">Valor</span>
+                        <span class="highlight-value">Boletas</span>
+                        <span class="highlight-value">%</span>
+                    </div>
+
+                    ${[
+                        { nombre: 'Martes', ing2026: c.martes_ingresos_2026, bol2026: c.martes_boletas_2026, ing2025: c.martes_ingresos_2025, bol2025: c.martes_boletas_2025 },
+                        { nombre: 'Miércoles', ing2026: c.miercoles_ingresos_2026, bol2026: c.miercoles_boletas_2026, ing2025: c.miercoles_ingresos_2025, bol2025: c.miercoles_boletas_2025 },
+                        { nombre: 'Jueves', ing2026: c.jueves_ingresos_2026, bol2026: c.jueves_boletas_2026, ing2025: c.jueves_ingresos_2025, bol2025: c.jueves_boletas_2025 },
+                    ].map((dia, i) => {
+                        const delta_ing = calcDelta(dia.ing2026, dia.ing2025);
+                        return `
+                            <div class="highlight-row ${i % 2 === 0 ? '' : 'alt'}">
+                                <span class="highlight-label">${dia.nombre}</span>
+                                <span class="highlight-value">${formatMoney(dia.ing2026)}</span>
+                                <span class="highlight-value">${formatNum(dia.bol2026)}</span>
+                                <span class="highlight-value ${getDeltaClass(delta_ing)}">${getDeltaText(delta_ing)}</span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+<!-- 
+                <div class="insights-box">
+                    <div class="insights-title">📌 Insights Clave</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                    <div class="insights-bullet">XXXX: Valor a definir</div>
+                </div>
+				
+				-->
+            `;
+        }
+
+        // INICIAR
+        renderExpositores();
+        renderAsistentes();
+        renderBoleteria();
+    </script>
+</body>
+</html>
